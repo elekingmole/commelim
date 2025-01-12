@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (editor) {
 			const document = editor.document;
 			var result = document.getText().replace(/\/\/.*\r\n[\s\t]*|\/\/.*\r[\s\t]*|\/\/.*\n[\s\t]*/g, '');
-			result = result.replace(/[\s]*#\s.*/g, '');
+			result = result.replace(/#.*\r\n[\s\t]*|#.*\r\n[\s\t]*|#.*\n[\s\t]*/g, '');
 			
 			editor.edit((edit) => {
 				const start = new vscode.Position(0, 0);
@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 				edit.replace(new vscode.Range(start, end), result);
 			});
 				
-			//vscode.window.showInformationMessage(result.toString());
+			
 		}
 		
 	});
