@@ -24,9 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 				const start = new vscode.Position(0, 0);
 				const end = new vscode.Position(document.lineCount, 0);
 				edit.replace(new vscode.Range(start, end), result);
-			});
-				
-			
+			});	
 		}
 		
 	});
