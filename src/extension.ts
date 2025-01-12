@@ -13,11 +13,24 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('commelim.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from comment_eliminator!');
+	const disposable = vscode.commands.registerCommand('commelim.commelim', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			const document = editor.document;
+			var result = document.getText().replace(/\/\/.*\r\n[\s\t]*|\/\/.*\r[\s\t]*|\/\/.*\n[\s\t]*/g, '');
+			result = result.replace(/[\s]*#\s.*/g, '');
+			
+			editor.edit((edit) => {
+				const start = new vscode.Position(0, 0);
+				const end = new vscode.Position(document.lineCount, 0);
+				edit.replace(new vscode.Range(start, end), result);
+			});
+				
+			//vscode.window.showInformationMessage(result.toString());
+		}
+		
 	});
+
 
 	context.subscriptions.push(disposable);
 }

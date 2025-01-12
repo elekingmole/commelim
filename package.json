@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "commelim.helloWorld",
-        "title": "Hello World"
+        "command": "commelim.commelim",
+        "title": "Eliminate Comment"
       }
     ]
   },
